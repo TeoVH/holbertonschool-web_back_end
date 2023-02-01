@@ -5,9 +5,7 @@ from typing import Tuple, List
 
 
 class Server:
-    """
-    Server class to paginate a database of popular baby names.
-    """
+    """Server class to paginate a database of popular baby names."""
 
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -26,8 +24,13 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Method named get_page that takes two integer arguments page with
-        default value 1 and page_size with default value 10
+        Get corresponding page
+        Args:
+            page: page number
+            page_size: size of the page
+
+        Return:
+            content of the target page
         """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
@@ -39,10 +42,15 @@ class Server:
 
     def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
         """
-        The function should return a tuple of size two containing a start
-        index and an end index corresponding to the range of indexes to return
-        in a list for those particular pagination parameters
-        Return: tuple with the range start and end size page
+        The function should return a tuple of size two containing a start index
+        and an end index corresponding to the range of indexes to return in a
+        list for those particular pagination parameters.
+
+        Args:
+            page: Current page
+            page_size: Total size of the page
+        Return:
+            tuple with the range start and end size page
         """
         final_size: int = page * page_size
         start_size: int = final_size - page_size
