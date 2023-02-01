@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Simple pagination
-"""
+"""1. Simple pagination"""
 import csv
 from typing import Tuple, List
 
@@ -37,9 +35,9 @@ class Server:
         pagination_range: Tuple = self.index_range(page, page_size)
         data: List = self.dataset()
 
-        return data[pagination_range[0]: pagination_range[1]]
+        return data[pagination_range[0] : pagination_range[1]]
 
-    def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
         """
         The function should return a tuple of size two containing a start
         index and an end index corresponding to the range of indexes to return
