@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
-"""
-Simple pagination
-"""
-import math
+"""2. Hypermedia pagination"""
 import csv
+import math
 from typing import Tuple, List, Dict
 
 
 class Server:
-    """
-    Server class to paginate a database of popular baby names.
-    """
+    """Server class to paginate a database of popular baby names."""
 
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -27,10 +23,31 @@ class Server:
 
         return self.__dataset
 
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+        Get corresponding page
+        Args:
+            page: page number
+            page_size: size of the page
+
+        Return:
+            content of the target page
+        """
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
+
+        pagination_range: Tuple = self.index_range(page, page_size)
+        data: List = self.dataset()
+
+        return data[pagination_range[0]: pagination_range[1]]
+
     def get_hyper(self, page: int, page_size: int) -> Dict:
         """
-        get_hyper method that takes the same arguments (and defaults)
-        as get_page and returns a dictionary
+        Hypermedia pagination
+        Args:
+            page: page number
+            page_size: number of elements per page
+
         Return:
             Dictionary that contain the following elements
             page_size: the length of the returned dataset page.
@@ -62,25 +79,17 @@ class Server:
 
         return hypermedia
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
         """
-        Method named get_page that takes two integer arguments page with
-        default value 1 and page_size with default value 10
-        """
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
+        The function should return a tuple of size two containing a start index
+        and an end index corresponding to the range of indexes to return in a
+        list for those particular pagination parameters.
 
-        pagination_range: Tuple = self.index_range(page, page_size)
-        data: List = self.dataset()
-
-        return data[pagination_range[0]: pagination_range[1]]
-
-    def index_range(page: int, page_size: int) -> Tuple[int, int]:
-        """
-        The function should return a tuple of size two containing a start
-        index and an end index corresponding to the range of indexes to return
-        in a list for those particular pagination parameters
-        Return: tuple with the range start and end size page
+        Args:
+            page: Current page
+            page_size: Total size of the page
+        Return:
+            tuple with the range start and end size page
         """
         final_size: int = page * page_size
         start_size: int = final_size - page_size
