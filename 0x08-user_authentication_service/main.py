@@ -74,8 +74,8 @@ def update_password(email: str, reset_token: str, new_password: str) -> None:
     print("Task validate: 'update_password'")
 
 
-EMAIL = "test@holberton.io"
-PASSWD = "test"
+EMAIL = "guillaume@holberton.io"
+PASSWD = "b4l0u"
 NEW_PASSWD = "t4rt1fl3tt3"
 
 
