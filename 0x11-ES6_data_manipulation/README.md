@@ -26,6 +26,7 @@ At the end of this project, you are expected to be able to explain to anyone, wi
     sudo bash nodesource_setup.sh
     sudo apt install nodejs -y
 
+
     $ nodejs -v
     v12.11.1
     $ npm -v
